@@ -1,0 +1,5 @@
+{
+    "intelephense.environment.includePaths": [
+        "/home/juliand/projects/php/xenforo2.2"
+    ]
+}

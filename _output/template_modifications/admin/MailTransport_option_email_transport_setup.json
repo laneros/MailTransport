@@ -1,0 +1,9 @@
+{
+    "template": "option_email_transport_setup",
+    "description": "Adds new Mail Transports to XF options",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "</xf:radiorow>",
+    "replace": "<xf:option value=\"mt_amazonses\">{{ phrase('MailTransport_amazon_ses') }}</xf:option>\n$0"
+}

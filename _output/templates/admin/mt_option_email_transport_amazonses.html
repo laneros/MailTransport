@@ -1,0 +1,26 @@
+<xf:title>{$option.title}</xf:title>
+
+<xf:form action="{{ link('options/email-transport-amazonses', $option) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow>
+				{{ phrase('mt_email_setup_explain_amazonses') }}
+			</xf:inforow>
+
+			<xf:textboxrow name="amazonses_access_key_id" value="{$option.option_value.mt_amazonses.access_key_id}"
+				label="{{ phrase('mt_amazonses_access_key_id') }}"
+				explain="{{ phrase('mt_amazonses_access_key_id_explain') }}"
+				required="required" />
+
+			<xf:textboxrow name="amazonses_secret_access_key"
+				label="{{ phrase('mt_amazonses_secret_access_key') }}"
+				explain="{{ phrase('mt_amazonses_secret_access_key_explain') }}"
+				required="required" />
+
+			<xf:inforow>
+				{{ phrase('mt_amazon_ses_inforow') }}
+			</xf:inforow>
+		</div>
+		<xf:submitrow sticky="true" submit="{{ phrase('continue') }}" />
+	</div>
+</xf:form>
