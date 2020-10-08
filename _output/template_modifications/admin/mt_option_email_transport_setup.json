@@ -5,5 +5,5 @@
     "enabled": true,
     "action": "str_replace",
     "find": "</xf:radiorow>",
-    "replace": "<xf:option value=\"mt_amazonses\">{{ phrase('MailTransport_amazon_ses') }}</xf:option>\n$0"
+    "replace": "<xf:option value=\"mt_amazonses\">{{ phrase('mt_amazon_ses') }}</xf:option>\n$0"
 }

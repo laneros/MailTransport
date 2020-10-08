@@ -1,0 +1,9 @@
+{
+    "template": "option_email_transport_setup",
+    "description": "Displays the Amazon SES account when",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "</ul>",
+    "replace": "<xf:if is=\"$option.option_value.amazonses_access_key_id\">\n\t<li>{{ phrase('mt_amazonses_access_key_id') }}: {$option.option_value.amazonses_access_key_id}</li>\n</xf:if>\n\n$0"
+}

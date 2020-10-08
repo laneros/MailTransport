@@ -20,7 +20,7 @@ class Option extends XFCP_Option
             {
                 case 'mt_amazonses':
                     $viewParams = [
-						//'option' => $option,
+                        'option' => $option,
 						'type' => $newType,
 					];
 					return $this->view('Laneros\MailTransport:Option\EmailTransportAmazonSes', 'mt_option_email_transport_amazonses', $viewParams);
@@ -30,12 +30,20 @@ class Option extends XFCP_Option
         return $view;
     }
 
-    public function actionEmailTransportAmazonSES(ParameterBag $params)
+    public function actionEmailTransportAmazonses(ParameterBag $params)
     {
-        $option = $this->assertEmailTransportOption($params->option_id);
+        $option_id = $params->get('option_id');
 
-        if ($this->isPost()) {
-            
-        }
+        $optionValue = $this->filter([
+            'amazonses_access_key_id' => 'str',
+            'amazonses_secret_access_key' => 'str'
+        ]);
+
+        $optionValue['emailTransport'] = 'amazonses';
+
+
+        $this->getOptionRepo()->updateOption($option_id, $optionValue);
+
+        return $this->redirect($this->getDynamicRedirect());
     }
 }
