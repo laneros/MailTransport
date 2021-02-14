@@ -1,6 +1,0 @@
-{
-    "from_class": "XF\\Admin\\Controller\\Option",
-    "to_class": "Laneros\\MailTransport\\XF\\Admin\\Controller\\Option",
-    "execute_order": 10,
-    "active": true
-}
