@@ -13,6 +13,10 @@ class SnsNotification extends AbstractController
 
         $message = json_decode($content);
 
+        if (isset($message->notificationType) && $message->notificationType = 'AmazonSnsSubscriptionSucceeded') {
+            return;
+        }
+
         if (empty($message->Type)) {
             \XF::logError('Amazon SNS payload does not contains a type: ' . $content);
             return $this->apiError('Amazon SNS payload does not contains a type', 'amazon_no_type');
