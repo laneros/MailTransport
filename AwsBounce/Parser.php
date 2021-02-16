@@ -7,14 +7,12 @@ use XF\EmailBounce\ParseResult;
 
 class Parser extends \XF\EmailBounce\Parser
 {
-    public function parseMessage($message)
+    public function parseMessage($content)
     {
-        $message = json_decode($message);
-
-        $message = json_decode($message->Message);
+        $message = json_decode($content);
 
         if (empty($message->notificationType)) {
-            throw new \InvalidArgumentException("No Amazon SNS notification type provided: " . $message);
+            throw new \InvalidArgumentException("No Amazon SNS notification type provided: " . $content);
             return false;
         }
 
@@ -38,8 +36,12 @@ class Parser extends \XF\EmailBounce\Parser
                 $result->remoteDiagnostics = 'complaint';
                 break;
 
+            case 'AmazonSnsSubscriptionSucceeded':
+                return false;
+                break;
+
             default:
-                throw new \InvalidArgumentException("Unsupported notification type");
+                throw new \InvalidArgumentException("Unsupported notification type: " . $content);
                 return false;
         }
 
@@ -57,7 +59,7 @@ class Parser extends \XF\EmailBounce\Parser
             }
         }
 
-        if ($this->verpBase) {
+        if ($this->verpBase && !empty($xToValidate)) {
             if (preg_match('#([a-z0-9]+)\+([^\s]+)#i', $xToValidate, $match)) {
                 $email = $match[2];
                 $hmac = hash_hmac('md5', $email, $this->verpHmacKey);

@@ -13,32 +13,29 @@ class SnsNotification extends AbstractController
 
         $message = json_decode($content);
 
-        if (isset($message->notificationType) && $message->notificationType = 'AmazonSnsSubscriptionSucceeded') {
-            return;
-        }
+        if (!empty($message->Type)) {
+            switch ($message->Type) {
+                case 'SubscriptionConfirmation':
+                    if (!empty($message->SubscribeURL)) {
+                        file_get_contents($message->SubscribeURL);
+                    }
+    
+                    return $this->apiSuccess();
+                    break;
 
-        if (empty($message->Type)) {
-            \XF::logError('Amazon SNS payload does not contains a type: ' . $content);
-            return $this->apiError('Amazon SNS payload does not contains a type', 'amazon_no_type');
-        }
+                case 'Notification':
+                    if (empty($message->Message)) {
+                        \XF::logError('No message provided: ' . $content);
+                        return $this->apiError('No message provided', 'amazon_no_message');
+                    }
+                    break;
 
-        switch ($message->Type) {
-            case 'SubscriptionConfirmation':
-                if (!empty($message->SubscribeURL)) {
-                    file_get_contents($message->SubscribeURL);
-                }
+                default:
+                    \XF::logError('Unsupported notification message: ' . $content);
+                    return $this->apiError('Unsupported notification message', 'amazon_no_notification_message');
+            }
 
-                return $this->apiSuccess();
-                break;
-            case 'Notification':
-                if (empty($message->Message)) {
-                    \XF::logError('No message provided: ' . $content);
-                    return $this->apiError('No message provided', 'amazon_no_message');
-                }
-                break;
-            default:
-                \XF::logError('Unsupported notification message: ' . $content);
-                return $this->apiError('Unsupported notification message', 'amazon_no_notification_message');
+            $content = $message->Message;
         }
 
         $parser = $this->getParser();
@@ -46,7 +43,6 @@ class SnsNotification extends AbstractController
         $processor = $this->getProcessor($parser);
 
         $processor->processMessage($content);
-
 
         return $this->apiSuccess();
     }
