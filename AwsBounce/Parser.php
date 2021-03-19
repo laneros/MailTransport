@@ -23,8 +23,8 @@ class Parser extends \XF\EmailBounce\Parser
                 $result->messageType = ParseResult::TYPE_BOUNCE;
 
                 $recipient = reset($message->bounce->bouncedRecipients);
-                $result->remoteStatus = $recipient->status;
-                $result->remoteDiagnostics = $recipient->diagnosticCode;
+                $result->remoteStatus = $recipient->status ?? '9.9.9';
+                $result->remoteDiagnostics = $recipient->diagnosticCode ?? 'Transient (soft) bounce';
 
                 break;
 

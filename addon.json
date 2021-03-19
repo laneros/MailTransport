@@ -1,14 +1,14 @@
 {
     "legacy_addon_id": "",
-    "title": "Mail Transports (AmazonSES)",
-    "description": "",
+    "title": "Amazon SES Bounces Support",
+    "description": "This addon supports bounce and complaint notifications from AWS SES. You need to configure the SNS bounce and complaint topics manually. See the FAQ for more information.",
     "version_id": 1000010,
     "version_string": "1.0.0 Alpha",
-    "dev": "",
-    "dev_url": "",
-    "faq_url": "",
+    "dev": "JulianD",
+    "dev_url": "https://xenforo.com/community/members/juliand.33/",
+    "faq_url": "https://github.com/laneros/MailTransport",
     "support_url": "",
     "extra_urls": [],
     "require": [],
-    "icon": ""
+    "icon": "fas fa-mail-bulk"
 }
