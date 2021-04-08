@@ -30,6 +30,7 @@ Now you need to tell to AWS SES that the topic you created in the first section 
 * Select the domain name used to send emails from your forum.
 * Go to the Notifications section and press the Edit Configuration button (SES console version 1) or the Edit button under the Feedback Notifications section (SES console version 2)
 * For the Bounces and Complaint feedback, choose the SNS Topic you created in the first section of this tutorial. It's the same SNS Topic for both options.
+* Make sure the `Include original headers` checkbox is checked.
 * Hit the Save button and that's it! Amazon should send a notification to the addon every time there's a bounce or complaint for one of your emails.
 
 
