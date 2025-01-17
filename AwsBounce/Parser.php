@@ -37,12 +37,12 @@ class Parser extends \XF\EmailBounce\Parser
                 break;
 
             case 'AmazonSnsSubscriptionSucceeded':
-                return false;
+                return $result;
                 break;
 
             default:
                 throw new \InvalidArgumentException("Unsupported notification type: " . $content);
-                return false;
+                return $result;
         }
 
         $dt = new \DateTime($message->mail->timestamp);
